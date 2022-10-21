@@ -9,7 +9,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 
 
-
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.Keys;
 import ru.netology.data.Data;
@@ -25,7 +24,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class AppTesting {
     @BeforeAll
     static void setUpAll() {
-        SelenideLogger.addListener("allure",  new AllureSelenide());
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterAll
