@@ -2,11 +2,15 @@ package ru.netology.test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
+import java.sql.DriverManager;
 
 
 import com.codeborne.selenide.Configuration;
@@ -14,6 +18,8 @@ import org.openqa.selenium.Keys;
 import ru.netology.data.Data;
 import ru.netology.page.DashboardPage;
 
+
+import java.sql.DriverManager;
 
 import static com.codeborne.selenide.Condition.visible;
 
@@ -62,13 +68,16 @@ public class AppTesting {
     }
 
     @Test
+    @SneakyThrows
     void test4() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:8080");
         new DashboardPage()
                 .secondCardCredit();
 
+
     }
+
 
     @Test
     void test5() {
@@ -123,6 +132,32 @@ public class AppTesting {
 
     }
 
+    @Test
+    @SneakyThrows
+    void test11() {
+        Configuration.holdBrowserOpen = true;
+        open("http://localhost:8080");
+        new DashboardPage()
+                .secondCardCreditSelect();
+        var cardsSQL = "SELECT status FROM credit_request_entity;";
+        try (
+                var conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/app", "app",
+                        "pass");
+                var cardsStmt = conn.prepareStatement(cardsSQL);) {
+            try (var rs = cardsStmt.executeQuery()) {
+                while (rs.next()) {
+                    var status = rs.getString("status");
+                    String expected = "DECLINED";
+                    String actual = status;
+                    Assertions.assertEquals(expected, actual);
 
+
+                }
+            }
+        }
+    }
 }
+
+
 

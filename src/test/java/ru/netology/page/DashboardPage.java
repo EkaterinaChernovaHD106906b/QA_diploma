@@ -151,6 +151,17 @@ public class DashboardPage {
         return new DashboardPage();
 
     }
+    public DashboardPage secondCardCreditSelect() {
+        creditButton.click();
+        cardNumber.setValue(Data.getCardNumberSecond());
+        month.setValue(Data.generateMonth(6));
+        year.setValue(Data.generateYear(3));
+        holder.setValue(Data.generateName("en"));
+        CVC.setValue(Data.generateCVV());
+        proccedButton.click();
+        return new DashboardPage();
+    }
+
 }
 
 
