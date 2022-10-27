@@ -54,25 +54,15 @@ public class Data {
         return cvv;
     }
 
-    public static String generateMonth(int months) {
-        return LocalDate.now().plusMonths(6).format(DateTimeFormatter.ofPattern("MM"));
+    public static String generateMonth(int plus, int minus) {
+        return LocalDate.now().plusMonths(plus).minusMonths(minus).format(DateTimeFormatter.ofPattern("MM"));
     }
 
-    public static String generateYear(int years) {
-        return LocalDate.now().plusYears(3).format(DateTimeFormatter.ofPattern("yy"));
+    public static String generateYear(int plus, int minus) {
+        return LocalDate.now().plusYears(plus).minusYears(minus).format(DateTimeFormatter.ofPattern("yy"));
     }
 
-    public static String generateExpiredYear(int years) {
-        return LocalDate.now().minusYears(2).format(DateTimeFormatter.ofPattern("yy"));
-    }
 
-    public static String generateThisYear() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
-    }
-
-    public static String generateExpiredMonth(int months) {
-        return LocalDate.now().minusMonths(3).format(DateTimeFormatter.ofPattern("MM"));
-    }
 }
 
 
