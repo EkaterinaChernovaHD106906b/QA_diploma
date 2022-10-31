@@ -2,8 +2,9 @@ package ru.netology.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Keys;
+
 import ru.netology.data.Data;
+import ru.netology.model.Model;
 
 import java.time.Duration;
 
@@ -29,38 +30,32 @@ public class DashboardPage {
         return new DashboardPage();
     }
 
-    public DashboardPage cardPayment(String card) {
-        buyButton.click();
-        cardNumber.setValue(card);
-        month.setValue(Data.generateMonth(6, 0));
-        year.setValue(Data.generateYear(3, 0));
-        holder.setValue(Data.generateName("en"));
-        CVC.setValue(Data.generateCVV());
+
+    public DashboardPage cardPayment(Model.Card card) {
+        cardNumber.setValue(card.getNumber());
+        month.setValue(card.getMonth());
+        year.setValue(card.getYear());
+        holder.setValue(card.getHolder());
+        CVC.setValue(card.getCVC());
         proccedButton.click();
 
         return new DashboardPage();
     }
 
-
-    public DashboardPage cardCredit(String card) {
-        creditButton.click();
-        cardNumber.setValue(card);
-        month.setValue(Data.generateMonth(2, 0));
-        year.setValue(Data.generateYear(1, 0));
-        holder.setValue(Data.generateName("en"));
-        CVC.setValue(Data.generateCVV());
-        proccedButton.click();
-
-
+    public DashboardPage payment() {
+        buyButton.click();
         return new DashboardPage();
+    }
 
+    public DashboardPage credit() {
+        creditButton.click();
+        return new DashboardPage();
     }
 
 
     public DashboardPage error() {
         error.shouldBe(Condition.visible, Duration.ofSeconds(15));
         return new DashboardPage();
-
     }
 
 
@@ -68,59 +63,6 @@ public class DashboardPage {
         invalidFormat.shouldBe(Condition.visible, Duration.ofSeconds(20));
         return new DashboardPage();
     }
-
-
-    public DashboardPage cardPaymentExpiredMonth() {
-        buyButton.click();
-        cardNumber.setValue("4444 4444 4444 4441");
-        month.setValue(Data.generateMonth(0, 2));
-        year.setValue(Data.generateYear(0, 0));
-        holder.setValue(Data.generateName("en"));
-        CVC.setValue(Data.generateCVV());
-        proccedButton.click();
-        return new DashboardPage();
-
-
-    }
-
-
-    public DashboardPage cardPaymentInvalidCVC() {
-        buyButton.click();
-        cardNumber.setValue("4444 4444 4444 4442");
-        month.setValue(Data.generateMonth(6, 0));
-        year.setValue(Data.generateYear(3, 0));
-        holder.setValue(Data.generateName("en"));
-        CVC.setValue(Data.generateInvalidCVV());
-        proccedButton.click();
-        return new DashboardPage();
-
-
-    }
-
-    public DashboardPage cardCreditExpiredYear() {
-        creditButton.click();
-        cardNumber.setValue(Data.getCardNumberSecond());
-        month.setValue(Data.generateMonth(2, 0));
-        year.setValue(Data.generateYear(0, 1));
-        holder.setValue(Data.generateName("en"));
-        CVC.setValue(Data.generateCVV());
-        proccedButton.click();
-        return new DashboardPage();
-    }
-
-    public DashboardPage cardCreditInvalidMonthZero() {
-        creditButton.click();
-        cardNumber.setValue(Data.getCardNumberSecond());
-        month.setValue("00");
-        year.setValue(Data.generateYear(1, 0));
-        holder.setValue(Data.generateName("en"));
-        CVC.setValue(Data.generateCVV());
-        proccedButton.click();
-        return new DashboardPage();
-
-    }
-
-
 }
 
 

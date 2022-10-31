@@ -17,15 +17,13 @@ public class Data {
     private static final Faker faker = new Faker(new Locale("en"));
 
     @Value
-    public static class CardNumberFirst {
+    public static class cardNumberFirst {
         private String numberFirstCard;
-
     }
 
     @Value
-    public static class CardNumberSecond {
+    public static class cardNumberSecond {
         private String numberSecondCard;
-
     }
 
     public static String getCardNumberFirst() {
@@ -54,15 +52,13 @@ public class Data {
         return cvv;
     }
 
-    public static String generateMonth(int plus, int minus) {
-        return LocalDate.now().plusMonths(plus).minusMonths(minus).format(DateTimeFormatter.ofPattern("MM"));
+    public static String generateMonth(int months) {
+        return LocalDate.now().plusMonths(months).format(DateTimeFormatter.ofPattern("MM"));
     }
 
-    public static String generateYear(int plus, int minus) {
-        return LocalDate.now().plusYears(plus).minusYears(minus).format(DateTimeFormatter.ofPattern("yy"));
+    public static String generateYear(int years) {
+        return LocalDate.now().plusYears(years).format(DateTimeFormatter.ofPattern("yy"));
     }
-
-
 }
 
 
