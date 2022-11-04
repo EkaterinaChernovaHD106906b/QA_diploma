@@ -35,7 +35,7 @@ public class OnlineServiceTesting {
     }
 
 
-    @Test
+ /*   @Test
     void firstCardPayment() {
         Model.Card card = new Model.Card("4444 4444 4444 4441", Data.generateMonth(2), Data.generateYear(3), Data.generateName("en"), Data.generateCVV());
         new DashboardPage()
@@ -126,7 +126,31 @@ public class OnlineServiceTesting {
                 .cardPayment(card)
                 .invalidFormat();
     }
-
+    @Test
+    void cardPaymentInvalidName(){
+        Model.Card card = new Model.Card("4444 4444 4444 4441", Data.generateMonth(4),Data.generateYear(2),"S",Data.generateCVV());
+        new DashboardPage()
+                .payment()
+                .cardPayment(card)
+                .invalidFormat();
+    }
+    @Test
+    void cardPaymentInvalidNameHyphen(){
+        Model.Card card = new Model.Card("4444 4444 4444 4441", Data.generateMonth(4),Data.generateYear(2),"-",Data.generateCVV());
+        new DashboardPage()
+                .payment()
+                .cardPayment(card)
+                .invalidFormat();
+    }
+    @Test
+    void cardPaymentInvalidNameNumbers(){
+        Model.Card card = new Model.Card("4444 4444 4444 4441", Data.generateMonth(4),Data.generateYear(2),"5578687",Data.generateCVV());
+        new DashboardPage()
+                .payment()
+                .cardPayment(card)
+                .invalidFormat();
+    }
+*/
 
     @Test
     void SelectTestSecondCardCredit() {

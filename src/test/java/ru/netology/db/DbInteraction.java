@@ -11,7 +11,7 @@ public class DbInteraction {
         var cardsSQL = "SELECT status FROM credit_request_entity;";
         try (
                 var conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/app", "app",
+                        System.getProperty("db.url"), "app",
                         "pass");
                 var cardsStmt = conn.prepareStatement(cardsSQL);) {
             try (var rs = cardsStmt.executeQuery()) {
@@ -31,8 +31,8 @@ public class DbInteraction {
     public void statusApproved() {
         var cardsSQL = "SELECT status FROM credit_request_entity;";
         try (
-                var conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/app", "app",
+                var conn = DriverManager.getConnection(System.getProperty("db.url"),
+                        "app",
                         "pass");
                 var cardsStmt = conn.prepareStatement(cardsSQL);) {
             try (var rs = cardsStmt.executeQuery()) {
